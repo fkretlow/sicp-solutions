@@ -24,9 +24,9 @@
 (define (product term a next b) (accumulate * 1 term a next b))
 
 
-; b) If your `accumulate` procedure generates a recursive process, write on that generates
-; an iterative process. If it generates an iterative process, write one, that generates a
-; recursive process.
+; b) If your `accumulate` procedure generates a recursive process, write one that
+; generates an iterative process. If it generates an iterative process, write one
+; that generates a recursive process.
 
 (define (accumulate2 combiner null-value term a next b)
   (define (iter acc a b)
