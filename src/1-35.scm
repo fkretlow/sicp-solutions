@@ -2,7 +2,7 @@
 ; =============
 
 ; Show that the golden ratio φ (Section 1.2.2) is a fixed point of the
-; transformation ``x -> 1 + 1/x``, and use this fact to compute φ by means of the
+; transformation x -> 1 + 1/x, and use this fact to compute φ by means of the
 ; ``fixed-point`` procedure.
 
 
@@ -20,9 +20,9 @@
   (try first-guess))
 
 
-; Let a, b, c and d be any four consecutive fibonacci numbers. Then ``c = a + b`` and ``c / b = (a + b) / b``.
-; Also, ``d = b + c = b + a + b`` and ``d / c = (b + a + b) / (a + b) = 1 + b / (a + b) = 1 + (c / b)^-1``.
-; Hence every ratio between two consecutive fibonacci numbers is equal to one plus the inverse of the previous ratio.
-; Thus the golden ratio φ is a fixed point of the transformation ``x -> 1 + 1/x``.
+; Let a, b, and c be any three consecutive Fibonacci numbers.
+; Then the ratio between a and b is r_n = b / a.
+; The next ratio is r_n+1 = c / b = (a+b) / b = 1 + a/b = 1 + 1 / r_n.
+; Thus φ is a fixed point of the transformation x -> 1 + 1/x.
 
 (define golden-ratio (fixed-point (lambda (x) (+ 1 (/ 1 x))) 1.0))
