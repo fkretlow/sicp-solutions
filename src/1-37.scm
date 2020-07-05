@@ -43,6 +43,13 @@
 ; b) If your ``cont-frac`` procedure generates a recursive process, write one
 ; that generates an iterative process. If it generates an iterative process,
 ; write one that generates a recursive process.
-;
-; -- How do you add the *ith* fraction to the running result in an iterative
-; process?
+
+; Bottom-up: Start with the *kth* fraction and gradually build the result on top
+; of it.
+
+(define (cont-frac2 n d k)
+  (define (iter r i)
+    (if (= i 0)
+        r
+        (iter (/ (n i) (+ (d i) r)) (- i 1))))
+  (iter 0 k))
