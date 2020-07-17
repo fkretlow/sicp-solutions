@@ -35,6 +35,7 @@
 (define (end-segment s) (cdr s))
 
 (define (length-segment s)
+  (define (square x) (* x x))
   (let ((dx (abs (- (x-point (end-segment s))
                     (x-point (start-segment s)))))
         (dy (abs (- (y-point (end-segment s))
