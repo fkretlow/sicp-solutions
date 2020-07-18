@@ -23,4 +23,5 @@
 ; ultimately reduces to x. Likewise, ``second`` applies the procedure to an
 ; anonymous procedure that returns its second argument. You could say that in
 ; this case the actual accessor methods are defined in ``first`` and
-; ``second``, while ``pair`` establishes the interface for those methods.
+; ``second``, while ``pair`` receives and executes the methods with its
+; specific data objects as arguments.
