@@ -26,7 +26,7 @@
 ; basic idea is that numbers are represented as chains of a single function f
 ; of one argument x. Zero is the action of not applying f to x at all, one is
 ; the action of applying f to x once, two is the action of applying f to x
-; twice, yielding the chain f(f(x)) or f . f, and so on. It doesn't matter what
+; twice, yielding the chain f(f(x)) or f•f, and so on. It doesn't matter what
 ; x is or what f does, but if we choose x = 0 and f(x) = incr(x) = x + 1,
 ; zero(x) = 0, one(x) = 1, two(x) = 2 and so on.
 
@@ -46,7 +46,7 @@
 ; one argument, the base value x. The returned procedure, if applied to any x,
 ; applies the n-fold chain of f to x.
 
-; Adding the church numerals m(f) = f • f • f ... f (m times) and n(f) = f • f
-; • f ... f (n times) must yield r(f) = m(f) • n(f) = f • f • f ... f (r times).
+; Adding the church numerals m(f) = f•f•...•f (m times) and n(f) = f•f•...•f
+; (n times) must yield r(f) = m(f)•n(f) = f•f•...•f (r times).
 
 (define (add m n) (lambda (f) (lambda (x) ((m f)((n f) x)))))
