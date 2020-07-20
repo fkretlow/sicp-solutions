@@ -28,7 +28,7 @@
 ; the action of applying f to x once, two is the action of applying f to x
 ; twice, yielding the chain f(f(x)) or f•f, and so on. It doesn't matter what
 ; x is or what f does, but if we choose x = 0 and f(x) = incr(x) = x + 1,
-; zero(x) = 0, one(x) = 1, two(x) = 2 and so on.
+; zero(f)(x) = 0, one(f)(x) = 1, two(f)(x) = 2 and so on.
 
 ; What boggles the mind with the given Scheme implementation is the fact that
 ; there is one more level of abstraction than one would intuitively expect.
