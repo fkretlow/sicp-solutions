@@ -32,9 +32,9 @@
 
 ; What boggles the mind with the given Scheme implementation is the fact that
 ; there is one more level of abstraction than one would intuitively expect.
-; ``zero`` is a function that takes as argument our function f and returns yet
-; another function that applies f to x. Likewise, we can give a direct
-; definition of ``one`` and ``two`` as::
+; ``one`` is a function that takes as argument our function f and returns yet
+; another function that applies f to x. We can give a direct definition of
+; ``one`` and ``two`` as::
 
 (define one (lambda (f) (lambda (x) (f x))))
 (define two (lambda (f) (lambda (x) (f (f x)))))
@@ -42,11 +42,11 @@
 ; It gets even more puzzling when we come to arithmetic operations on church
 ; numerals. It helps to remember what 'types' of arguments the procedure
 ; ``add`` must take and what it must return: The church numeral n is a
-; procedure of one argument, a procedure f and it returns another procedure of
-; one argument, the base value x. The returned procedure, if applied to any x,
+; procedure of one argument (a procedure f) and it returns another procedure of
+; one argument (the base value x). The returned procedure, if applied to any x,
 ; applies the n-fold chain of f to x.
 
 ; Adding the church numerals m(f) = f•f•...•f (m times) and n(f) = f•f•...•f
-; (n times) must yield r(f) = m(f)•n(f) = f•f•...•f (r times).
+; (n times) must yield r(f) = m(f)•n(f) = f•f•...•f (r = m*n times).
 
 (define (add m n) (lambda (f) (lambda (x) ((m f)((n f) x)))))
