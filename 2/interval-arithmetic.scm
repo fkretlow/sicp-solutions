@@ -69,8 +69,8 @@
 
 ; The minimum value the difference can be is the difference of the lower bound
 ; of the first interval and the upper bound of the second interval. The maximum
-; it can be is the difference of the upper bound of the first and the lower
-; bound of the second interval.
+; value it can be is the difference of the upper bound of the first interval
+; and the lower bound of the second interval.
 
 (define (sub-interval x y)
   (make-interval (- (lower-bound x) (upper-bound y))
