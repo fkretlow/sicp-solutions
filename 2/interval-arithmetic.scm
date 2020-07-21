@@ -75,3 +75,38 @@
 (define (sub-interval x y)
   (make-interval (- (lower-bound x) (upper-bound y))
                  (- (upper-bound x) (lower-bound y))))
+
+
+; Exercise 2.9
+; ------------
+;
+; The *width* of an interval is half of the difference between its upper and
+; lower bounds. The width is a measure of the uncertainty of the number
+; specified by the interval. For some arithmetic operations the width of the
+; result of combining two intervals is a function only of the widths of the
+; argument intervals, whereas for others the width of the combination is not a
+; function of the widths of the argument intervals. Show that the width of the
+; sum (or difference) of two intervals is a function only of the widths of the
+; intervals being added (or subtracted). Give examples to show that this is not
+; true for multiplication or division.
+
+; Let a, b and c be intervals such that a + b = c. Then ::
+;
+;     width(a) = 1/2 * (upper(a) - lower(a))
+;     width(b) = 1/2 * (upper(b) - lower(b))
+;
+;     width(c) = 1/2 * (upper(c) - lower(c))
+;              = 1/2 * (upper(a) + upper(b) - (lower(a) + lower(b)))
+;              = 1/2 * ((upper(a) - lower(a)) + (upper(b) - lower(b)))
+;              = width(a) + width(b)
+;
+; The same goes for subtraction.
+;
+; As for multiplication, the width of the resulting interval depends on the
+; signs of the bounds of the input intervals as well. Consider three intervals
+; a * b = c where a is a symmetric interval around 0, e.g. [-1,1] and b is
+; entirely positive (or entirely negative). In this case width(b) doesn't
+; affect width(c), only the bound of b with the greater absolute value does. ::
+;
+;     [-1,1] * [0,2] = [-1,1] * [1,2] = [-2,2]
+
