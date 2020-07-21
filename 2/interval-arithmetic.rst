@@ -24,7 +24,7 @@ sum of the two upper bounds::
 Alyssa also works out the product of two intervals by finding the minimum and
 the maximum of the products of the bound and using them as the bounds of the
 resulting interval. (``min`` and ``max`` are primitives that find the minimum
-or maximum of any number of arguments.)::
+or maximum of any number of arguments.) ::
 
     (define (mul-interval x y)
       (let ((p1 (* (lower-bound x) (lower-bound y)))
@@ -36,7 +36,7 @@ or maximum of any number of arguments.)::
 
 To divide two intervals, Alyssa multiplies the first by the reciprocal of the
 second. Note that the bounds of the reciprocal interval are the reciprocal of
-the upper bound and the reciprocal of the lower bound in that order.::
+the upper bound and the reciprocal of the lower bound in that order. ::
 
     (define (div-interval x y)
       (mul-interval
@@ -55,7 +55,7 @@ interval constructor::
     (define (make-interval a b) (cons a b))
 
 Define selectors ``upper-bound`` and ``lower-bound`` to complete the
-implementation.::
+implementation. ::
 
     (define (lower-bound i) (car i))
     (define (upper-bound i) (cdr i))
@@ -71,7 +71,7 @@ called ``sub-interval``.
 The minimum value the difference can be is the difference of the lower bound
 of the first interval and the upper bound of the second interval. The maximum
 value it can be is the difference of the upper bound of the first interval
-and the lower bound of the second interval.::
+and the lower bound of the second interval. ::
 
     (define (sub-interval x y)
       (make-interval (- (lower-bound x) (upper-bound y))
