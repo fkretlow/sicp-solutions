@@ -54,10 +54,17 @@
 (define (make-interval a b) (cons a b))
 
 ; Define selectors ``upper-bound`` and ``lower-bound`` to complete the
-; implementation.
+; implementation. ::
 
 (define (lower-bound i) (car i))
 (define (upper-bound i) (cdr i))
+
+; Actually, let's make sure we don't get reversed intervals::
+
+(define (make-interval a b)
+  (if (< b a)
+      (error "invalid interval: upper bound is smaller than lower bound")
+      (cons a b)))
 
 
 ; Exercise 2.8
@@ -127,3 +134,50 @@
         (make-interval
           (/ 1.0 (upper-bound y))
           (/ 1.0 (lower-bound y))))))
+
+
+; Exercise 2.11
+; -------------
+;
+; In passing, Ben also cryptically comments: "By testing the signs of the
+; endpoints of the intervals, it is possible to break ``mul-interval`` into
+; nine cases, only one of which requires more than two multiplications."
+; Rewrite this procedure using Ben's suggestion.
+
+; We assume that we only get valid intervals where lower <= upper. ::
+
+(define (mul-interval x y)
+  (define (pos-interval? x) (and (> (lower-bound x) 0) (> (upper-bound x) 0)))
+  (define (neg-interval? x) (and (< (lower-bound x) 0) (< (upper-bound x) 0)))
+  (cond ((pos-interval? x)
+         (cond ((pos-interval? y)
+                (make-interval (* (lower-bound x) (lower-bound y))
+                               (* (upper-bound x) (upper-bound y))))
+               ((neg-interval? y)
+                (make-interval (* (upper-bound x) (lower-bound y))
+                               (* (lower-bound x) (upper-bound y))))
+               (else
+                (make-interval (* (upper-bound x) (lower-bound y))
+                               (* (upper-bound x) (upper-bound y))))))
+        ((neg-interval? x)
+         (cond ((pos-interval? y)
+                (make-interval (* (lower-bound x) (upper-bound y))
+                               (* (upper-bound x) (lower-bound y))))
+               ((neg-interval? y)
+                (make-interval (* (upper-bound x) (upper-bound y))
+                               (* (lower-bound x) (lower-bound y))))
+               (else
+                (make-interval (* (lower-bound x) (upper-bound y))
+                               (* (lower-bound x) (lower-bound y))))))
+        (else
+         (cond ((pos-interval? y)
+                (make-interval (* (lower-bound x) (upper-bound y))
+                               (* (upper-bound x) (upper-bound y))))
+               ((neg-interval? y)
+                (make-interval (* (upper-bound x) (lower-bound y))
+                               (* (lower-bound x) (lower-bound y))))
+               (else
+                (make-interval (min (* (lower-bound x) (upper-bound y))
+                                    (* (upper-bound x) (lower-bound y)))
+                               (max (* (lower-bound x) (lower-bound y))
+                                    (* (upper-bound x) (upper-bound y)))))))))
