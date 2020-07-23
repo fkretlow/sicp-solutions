@@ -212,3 +212,27 @@
     (make-interval (- c w) (+ c w))))
 
 (define (percent i) (* (/ (width i) (center i)) 100))
+
+
+; Exercise 2.13
+; -------------
+;
+; Show that under the assumption of small percentage tolerances there is a
+; simple formula for the approximate percentage tolerance of the product of two
+; intervals in terms of the products of the factors. You may simplify the
+; problem by assuming that all numbers are positive.
+
+; Consider three intervals a * b = c. In the following, a, b, and c are the
+; center values of the intervals; and pa, pb and pc the respective percentage
+; tolerances.
+;
+; lower(c) = (1 - pc) * c = lower(a) * lower(b)
+;                         = (1-pa)a * (1-pb)b
+;                         = (1 - pa - pb + pa*pb) * ab
+; => pc = pa + pb - pa*pb
+;
+; Similar reasoning leads to pc = pa + pb + pa*pb for the upper bound.
+;
+; If we assume small percentage tolerances, then the product pa*pb is very
+; small. Therefore, for a rough estimation of the resulting percentage
+; tolerance, the formula pc = pa + pb is sufficient.
