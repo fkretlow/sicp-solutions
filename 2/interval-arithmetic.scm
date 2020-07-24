@@ -236,3 +236,55 @@
 ; If we assume small percentage tolerances, then the product pa*pb is very
 ; small. Therefore, for a rough estimation of the resulting percentage
 ; tolerance, the formula pc = pa + pb is sufficient.
+
+
+; [...]
+; Lem complains that Alyssa's system gives different answers [for algebraically
+; equivalent expressions] [...].
+
+
+; Exercise 2.14
+; -------------
+;
+; Demostrate that Lem is right. Investigate the behavior of the system [...].
+
+; A = 3 with 1% error tolerance
+; 1 / A     = 0.3334 with 1% error tolerance
+; A / (A*A) = 0.3335 with 3% error tolerance
+
+
+; Exercises 2.15 and 2.16
+; -----------------------
+;
+; Eva Lu Ator, another user, has also noticed the different intervals computed
+; by different but algebraically equivalent expressions. She says that a
+; formula to compute with intervals using Alyssa's system will produce tighter
+; error bounds if it can be written in such a form that no variable that
+; represents an uncertain number is repeated. [...] Is she right? Why?
+;
+; Explain, in general, why equivalent algebraic expressions may lead to
+; different answers. Can you devise an interval-arithmetic package that does
+; not have this shortcoming, or is this task impossible? (Waring: This problem
+; is very difficult.)
+
+
+; The result of any operation on two intervals will have a greater error
+; tolerance than both of the original intervals. Also, any complicated
+; algebraic expression can be parsed into a tree of sub-expressions of one
+; operator and at most two operands each. Thus the error tolerance of the
+; result of an arithmetic expression with intervals depends on the number of
+; intervals in the expression: The more intervals there are, the greater the
+; error tolerance of the result will be. Therefore it is indeed a good idea to
+; "normalize" the expression to be evaluated in such a way that the number of
+; uncertain numbers it contains is as small as possible. This is the case when
+; every interval appears only once, though it may not always be possible to
+; eliminate all duplicate intervals.
+;
+; I surmise that this may also be a way to solve the problem in general. Is it
+; possible to devise a system that would transform algebraic expressions with
+; intervals into equivalent forms that involve the smallest possible number of
+; intervals? For this to work one would probably need to parse the expression
+; into a tree-like data structure so it's possible to analyze it.
+;
+; (I postpone the solution of this problem until I have significantly raised my
+; IQ.)
