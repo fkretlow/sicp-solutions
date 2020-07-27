@@ -1,6 +1,8 @@
 ; Exercise 2.20
 ; =============
 ;
+; [...]
+;
 ; Use [dotted tail] notation to write a procedure ``same-parity`` that takes
 ; one or more integers and returns a list of all the arguments that have the
 ; same even-odd parity as the first argument. For example::
