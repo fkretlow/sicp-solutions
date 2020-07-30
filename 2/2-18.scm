@@ -15,6 +15,16 @@
         (reverse-iter (cons (car in) out) (cdr in))))
   (reverse-iter '() l))
 
+; This, like many iterative recursive processes, can be expressed as a left fold:
+
+(define (fold f a xs)
+  (if (null? xs)
+      a
+      (fold f (f (car xs) a) (cdr xs))))
+
+(define (reverse xs) (fold cons '() xs))
+
+
 ; It currently escapes me how to do this efficiently with linear recursion on a
 ; singly linked list. Of course we could use ``append`` and ``last-pair``, but
 ; that would be horribly inefficient because we would walk the remaining list
