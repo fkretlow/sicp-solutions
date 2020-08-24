@@ -1,0 +1,15 @@
+Exercise 2.43
+=============
+
+[...] ::
+
+    (flatmap
+      (lambda (new-row)
+        (map (lambda (rest-of-queens)
+               (adjoin-position new-row k rest-of-queens))
+             (queen-cols (- k 1))))
+      (enumerate-interval 1 board-size))
+
+Explain why this interchange makes the program run slowly. Estimate how long it will take Louis's program to sove the eight queens puzzle, assuming that the program in Exercise 2.42 solves the puzzle in time T.
+
+For a board of size k, this version recursively solves smaller instances of the puzzle k times instead of once for each column. It'll run in time k²T.
