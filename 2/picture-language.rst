@@ -8,7 +8,9 @@ Define the procedure ``up-split`` used by ``corner-split``. It is similar to ``r
 
 Solution
 ........
+
 ::
+
     (define (up-split painter n)
       (if (= n 0)
           painter
@@ -27,7 +29,9 @@ produces procedures ``right-split`` and ``up-split`` with the same behaviors as 
 
 Solution
 ........
+
 ::
+
     (define (split top-level low-level)
       (lambda (painter n)
         (if (= n 0)
