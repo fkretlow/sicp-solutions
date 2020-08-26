@@ -36,6 +36,6 @@ Solution
       (lambda (painter n)
         (if (= n 0)
             painter
-            (let ((smaller ((split top-level low-level) painter)))
+            (let ((smaller ((split top-level low-level) painter (- n 1))))
               (high-level painter
                           (low-level smaller smaller))))))
