@@ -1,0 +1,48 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{fontspec}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage[table,xcdraw]{xcolor}
+
+\begin{document}
+
+
+Each recursive call \texttt{(queen-cols i)} generates the sequence of possible solutions for the first \(i\) columns on the \(k \times k\) board. Let \(q_i\) denote the length of that sequence and \(T_i\) the time required to generate it. Then 
+
+\begin{align*}
+    T_i = T_{i-1} + T'_i
+\end{align*}
+
+\noindent where \(T'_i\) is the time required to generate the sequence of solutions for \(i\) columns from the sequence of solutions for \(i-1\) columns.
+
+\begin{align*}
+    T'_i = T_\text{filter} + T_\text{flatmap}
+\end{align*}
+
+Filtering the sequence of proposed solutions requires \(i - 1\) checks for each of the \(q_{i-1}k\) proposed solutions, so 
+
+\begin{align*}
+T_\text{filter} = q_{i-1}k(i-1)
+\end{align*}
+
+In the build-up step we append each of the \(k\) column indices to each of the \(q_{i-1}\) solutions from the previous step and use \texttt{flatmap} to combine these \(q_{i-1}\) sequences of proposed solutions to a single sequence.
+
+\begin{align*}
+    T_\text{flatmap} = q_{i-1}k + T_\text{append}
+\end{align*}
+
+\texttt{flatmap} is implemented in terms of \texttt{append}. Assuming that \texttt{append} requires time proportional to the length of its first argument, we have \(q_{i-1} - 1\) calls to \texttt{append} where the length of the first sequence is \(k\), \(2k\), \(3k\) and so on until \((q_{i-1} - 1)k\).
+
+\begin{align*}
+    T_\text{append} &= k \cdot \displaystyle \sum_{j=1}^{q_{i-1}-1} j = ... = k \cdot \frac{q_{i-1}(q_{i-1}-1)}{2} \\
+    T_\text{flatmap}&= k \cdot \left( q_{i-1} + \frac{q_{i-1}(q_{i-1}-1)}{2} \right) \\
+                    &= q_{i-1}k \cdot \left( 1 + \frac{q_{i-1}-1}{2} \right) \\
+    T'_i &= q_{i-1}k(i-1) + q_{i-1}k \cdot \left( 1 + \frac{q_{i-1}-1}{2} \right) \\
+         &= q_{i-1}k \cdot \left( i + \frac{q_{i-1}-1}{2}\right)
+\end{align*}
+
+
+
+\end{document}

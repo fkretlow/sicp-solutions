@@ -67,6 +67,8 @@
          #f)
         (else (safe? (cdr set) (- k 1)))))
 
+(define empty-board '())
+
 (define (queens board-size)
   (define (queen-cols col)
     (if (= col 0)
@@ -78,5 +80,12 @@
               (map (lambda (row)
                      (add-position prev-solution (make-position col row)))
                    (enumerate-interval 1 board-size)))
-            (queen-cols (- col 1))))))
+            ; display number of solutions for col - 1 columns:
+            (let ((prev-solutions (queen-cols (- col 1))))
+              (begin (display (- col 1)) (display ": ")
+                     (display (length prev-solutions))
+                     (newline)
+                     prev-solutions))))))
+            ; or just compute the end result
+            ; (queen-cols (- col 1))))))
   (queen-cols board-size))
