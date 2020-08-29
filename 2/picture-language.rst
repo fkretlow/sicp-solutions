@@ -39,3 +39,50 @@ Solution
             (let ((smaller ((split top-level low-level) painter (- n 1))))
               (high-level painter
                           (low-level smaller smaller))))))
+
+Exercise 2.46
+-------------
+A two-dimensional vector v running from the origin to a point can be represented as a pair consisting of an x-coordinate and a y-coordinate. Implement a data abstraction for vectors by giving a constructor ``make-vect`` and corresponding selectors ``xcor-vect`` and ``ycor-vect``. In terms of your selectors and constructor, implement procedures ``add-vect``, ``sub-vect`` and ``scale-vect`` that perform the operations vector addition, vector subtraction, and multiplying a vector by a scalar. [...]
+
+Solution
+........
+
+::
+    
+    (define (make-vect xcor ycor) (cons xcor ycor))
+    (define (xcor-vect v) (car v))
+    (define (ycor-vect v) (cdr v))
+
+    (define (add-vect v w)
+      (make-vect (+ (xcor-vect v) (xcor-vect w))
+                 (+ (ycor-vect v) (ycor-vect w))))
+
+    (define (sub-vect v w)
+      (make-vect (- (xcor-vect v) (xcor-vect w))
+                 (- (ycor-vect v) (ycor-vect w))))
+
+    (define (scale-vect v s)
+      (make-vect (* (xcor-vect v) s)
+                 (* (ycor-vect v) s)))
+
+Exercise 2.47
+=============
+
+Here are two possible constructors for frames. For each constructor supply the appropriate selectors to produce an implementation for frames.
+
+Solution
+........
+
+::
+
+    (define (make-frame origin edge1 edge2)
+      (list origin edge1 edg2))
+    (define (origin-frame f) (car f))
+    (define (edge1-frame f) (cadr f))
+    (define (edge2-frame f) (last f))
+
+    (define (make-frame origin edge1 edge2)
+      (cons origin (cons edge1 edge2)))
+    (define (origin-frame f) (car f))
+    (define (edge1-frame f) (cadr f))
+    (define (edge2-frame f) (cdr (cdr f)))
