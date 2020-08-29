@@ -66,7 +66,7 @@ Solution
                  (* (ycor-vect v) s)))
 
 Exercise 2.47
-=============
+-------------
 
 Here are two possible constructors for frames. For each constructor supply the appropriate selectors to produce an implementation for frames.
 
