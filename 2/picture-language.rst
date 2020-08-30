@@ -131,4 +131,4 @@ c. The painter that draws a diamond shape by connecting the midpoints of the sid
 
 d. The wave painter.
 
-You're kidding, right? Should I give the definition of a generic ``draw-svg`` painter as well? But seriously, those aren't straight line segments, so give me a procedure ``draw-bezier`` and I'll gladly look into it.
+    You're kidding, right? Should I give the definition of a generic ``draw-svg`` painter as well? But seriously, those aren't straight line segments, so give me a procedure ``draw-bezier`` and I'll gladly look into it.
