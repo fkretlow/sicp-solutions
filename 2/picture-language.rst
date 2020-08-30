@@ -86,3 +86,49 @@ Solution
     (define (origin-frame f) (car f))
     (define (edge1-frame f) (cadr f))
     (define (edge2-frame f) (cdr (cdr f)))
+
+Exercise 2.48
+-------------
+
+A directed line segment in the plane can be represented as a pair of vectors -- the vector running from the origin to the start-point of the segment, and the vector running from the origin to the end-point of the segment. Use your vector representation from Exercise 2.46 to define a representation for segments with a constructor ``make-segment`` and selectors ``start-segment`` and ``end-segment``.
+
+Solution
+........
+
+::
+
+    (define (make-segment x1 y1 x2 y2)
+      (cons (make-vector x1 y1) (make-vector x2 y2)))
+    (define (start-segment s) (car s))
+    (define (end-segment s) (cdr s))
+
+Exercise 2.49
+-------------
+
+Use ``segments->painter`` to define the following primitive painters:
+
+a. The painter that draws the outline of the designated frame. ::
+
+    (define outline
+      (segments->painter (list (make-segment 0 0 0 1)
+                               (make-segment 0 1 1 1)
+                               (make-segment 1 1 1 0)
+                               (make-segment 1 0 0 0))))
+
+b. The painter that draws an "X" by connecting opposite corners of the frame. ::
+
+    (define X
+      (segments->painter (list (make-segment 0 0 1 1)
+                               (make-segment 0 1 1 0))))
+
+c. The painter that draws a diamond shape by connecting the midpoints of the sides of the frame. ::
+
+    (define diamond
+      (segments->painter (list (make-segment 0 0.5 0.5 1)
+                               (make-segment 0.5 1 1 0.5)
+                               (make-segment 1 0.5 0.5 0)
+                               (make-segment 0.5 0 0 0.5))))
+
+d. The wave painter.
+
+You're kidding, right? Should I give the definition of a generic ``draw-svg`` painter as well? But seriously, those aren't straight line segments, so give me a procedure ``draw-bezier`` and I'll gladly look into it.
