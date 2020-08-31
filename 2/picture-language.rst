@@ -129,9 +129,7 @@ c. The painter that draws a diamond shape by connecting the midpoints of the sid
                                (make-segment 1 0.5 0.5 0)
                                (make-segment 0.5 0 0 0.5))))
 
-d. The wave painter.
-
-  You're kidding, right? Should I give the definition of a generic ``draw-svg`` painter as well? But seriously, those aren't straight line segments, so give me a procedure ``draw-bezier`` and I'll gladly look into it.
+d. The wave painter. -- Nah, that's too much work. Also, these are curves, not lines!
 
 
 Exercise 2.50
@@ -143,6 +141,7 @@ Solution
 ........
 
 ::
+
     (define (fliz-horiz painter)
       (transform-painter painter
                          (make-vect 1.0 0.0)
@@ -171,6 +170,7 @@ Solution
 ........
 
 ::
+
     (define (below painter1 painter2)
       (let ((split-point (make-vect 0.0 0.5)))
         (let ((paint-bottom
