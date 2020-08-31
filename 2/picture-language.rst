@@ -6,9 +6,6 @@ Exercise 2.44
 -------------
 Define the procedure ``up-split`` used by ``corner-split``. It is similar to ``right-split``, except that it switches the roles of ``below`` and ``beside``.
 
-Solution
-........
-
 ::
 
     (define (up-split painter n)
@@ -27,9 +24,6 @@ Exercise 2.45
 
 produces procedures ``right-split`` and ``up-split`` with the same behaviors as the ones already defined.
 
-Solution
-........
-
 ::
 
     (define (split top-level low-level)
@@ -44,11 +38,8 @@ Exercise 2.46
 -------------
 A two-dimensional vector v running from the origin to a point can be represented as a pair consisting of an x-coordinate and a y-coordinate. Implement a data abstraction for vectors by giving a constructor ``make-vect`` and corresponding selectors ``xcor-vect`` and ``ycor-vect``. In terms of your selectors and constructor, implement procedures ``add-vect``, ``sub-vect`` and ``scale-vect`` that perform the operations vector addition, vector subtraction, and multiplying a vector by a scalar. [...]
 
-Solution
-........
-
 ::
-    
+
     (define (make-vect xcor ycor) (cons xcor ycor))
     (define (xcor-vect v) (car v))
     (define (ycor-vect v) (cdr v))
@@ -70,9 +61,6 @@ Exercise 2.47
 
 Here are two possible constructors for frames. For each constructor supply the appropriate selectors to produce an implementation for frames.
 
-Solution
-........
-
 ::
 
     (define (make-frame origin edge1 edge2)
@@ -91,9 +79,6 @@ Exercise 2.48
 -------------
 
 A directed line segment in the plane can be represented as a pair of vectors -- the vector running from the origin to the start-point of the segment, and the vector running from the origin to the end-point of the segment. Use your vector representation from Exercise 2.46 to define a representation for segments with a constructor ``make-segment`` and selectors ``start-segment`` and ``end-segment``.
-
-Solution
-........
 
 ::
 
@@ -137,9 +122,6 @@ Exercise 2.50
 
 Define the transformation ``flip-horiz``, which flips painters horizontally, and transformations that rotate painters counterclockwise by 180 degrees and 270 degrees.
 
-Solution
-........
-
 ::
 
     (define (fliz-horiz painter)
@@ -165,9 +147,6 @@ Exercise 2.51
 -------------
 
 Define the ``below`` operation for painters. ``below`` takes two painters as arguments. The resulting painter, given a frame, draws with the first painter in the bottom half of the frame and the second painter in the top. Define ``below`` in two different ways -- first by writing a procedure that is analogous to the ``beside`` procedure given above, and again in terms of beside and suitable rotations operations (from Exercise 2.50).
-
-Solution
-........
 
 ::
 
