@@ -5,7 +5,7 @@
 ; basic list-manipulation operations in terms of ``accumulate``::
 
 ; This (given) implementaion of ``accumulate`` is a *right* fold. The left fold
-; would be slghtly more obvious, but it wouldn't allow to replicate lists with
+; would be slightly more obvious, but it wouldn't allow to replicate lists with
 ; ``(accumulate cons nil <list>)``::
 
 (define (accumulate op init sequence)
