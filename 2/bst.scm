@@ -58,13 +58,11 @@
                 '())
                (else
                  (let ((swap-node (bst-smallest-child (bst-right-child node))))
-                   (let ((swap-key (bst-key swap-node))
-                         (swap-value (bst-value swap-node)))
-                     (bst-make-node swap-key
-                                    swap-value
-                                    (bst-left-child node)
-                                    (bst-delete (bst-right-child node)
-                                                swap-key)))))))
+                   (bst-make-node (bst-key swap-node)
+                                  (bst-value swap-node)
+                                  (bst-left-child node)
+                                  (bst-delete (bst-right-child node)
+                                              (bst-key swap-node)))))))
         ((bst-less? key (bst-key node))
          (bst-make-node (bst-key node)
                         (bst-value node)
