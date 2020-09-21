@@ -1,10 +1,11 @@
-; BINARY SEARCH TREE
-; - (make-bst)               -> returns a new empty tree
-; - (bst-set tree key value) -> sets the value associated with key and returns the modified tree
-; - (bst-get tree key nil)   -> returns the value associated with key or nil if key doesn't exist
-; - (bst-delete tree key)    -> removes the key-value pair associated with key and returns the modified tree
-; - (bst-has? tree key)      -> returns #t if key exists in the tree
-; - (bst-flatten tree)       -> returns a sorted list of all key-value pairs in the tree
+; MAP
+; Built in terms of a binary search tree.
+; - (make-map)                 -> returns a new empty map
+; - (map-set map key value)    -> sets the value associated with key and returns the modified map
+; - (map-get map key default)  -> returns the value associated with key or default if key doesn't exist
+; - (map-delete map key)       -> removes the key-value pair associated with key and returns the modified map
+; - (map-has? map key)         -> returns #t if key exists in the map
+; - (map-flatten map)          -> returns a sorted list of all key-value pairs in the map
 
 (define (_bst-less? a b)
   (cond ((number? a) (< a b))
@@ -14,7 +15,7 @@
 
 (define (_bst-equal? a b) (equal? a b))
 
-(define (make-bst) '())
+(define (make-map) '())
 (define (_bst-make-node key value left right) (list (cons key value) left right))
 (define (_bst-left-child node) (cadr node))
 (define (_bst-right-child node) (caddr node))
@@ -35,7 +36,7 @@
       (_bst-greatest-child (_bst-right-child node))
       node))
 
-(define (bst-set node key value)
+(define (map-set node key value)
   (cond ((null? node)
          (_bst-make-node key value '() '()))
         ((_bst-equal? key (_bst-key node))
@@ -43,27 +44,27 @@
         ((_bst-less? key (_bst-key node))
          (_bst-make-node (_bst-key node)
                          (_bst-value node)
-                         (bst-set (_bst-left-child node) key value)
+                         (map-set (_bst-left-child node) key value)
                          (_bst-right-child node)))
         (else
           (_bst-make-node (_bst-key node)
                           (_bst-value node)
                           (_bst-left-child node)
-                          (bst-set (_bst-right-child node) key value)))))
+                          (map-set (_bst-right-child node) key value)))))
 
-(define (bst-get node key nil)
-  (cond ((null? node) nil)
+(define (map-get node key default)
+  (cond ((null? node) default)
         ((_bst-equal? key (_bst-key node)) (_bst-value node))
-        ((_bst-less? key (_bst-key node)) (bst-get (_bst-left-child node) key))
-        (else (bst-get (_bst-right-child node) key))))
+        ((_bst-less? key (_bst-key node)) (map-get (_bst-left-child node) key default))
+        (else (map-get (_bst-right-child node) key default))))
 
-(define (bst-has? node key)
+(define (map-has? node key)
   (cond ((null? node) #f)
         ((_bst-equal? key (_bst-key node)) #t)
-        ((_bst-less? key (_bst-key node)) (bst-get (_bst-left-child node) key))
-        (else (bst-get (_bst-right-child node) key))))
+        ((_bst-less? key (_bst-key node)) (map-get (_bst-left-child node) key))
+        (else (map-get (_bst-right-child node) key))))
 
-(define (bst-delete node key)
+(define (map-delete node key)
   (cond ((null? node) node)
         ((_bst-equal? key (_bst-key node))
          (cond ((and (_bst-has-left-child? node)
@@ -80,22 +81,22 @@
                    (_bst-make-node (_bst-key swap-node)
                                    (_bst-value swap-node)
                                    (_bst-left-child node)
-                                   (bst-delete (_bst-right-child node)
+                                   (map-delete (_bst-right-child node)
                                                (_bst-key swap-node)))))))
         ((_bst-less? key (_bst-key node))
          (_bst-make-node (_bst-key node)
                          (_bst-value node)
-                         (bst-delete (_bst-left-child node) key)
+                         (map-delete (_bst-left-child node) key)
                          (_bst-right-child node)))
         (else
           (_bst-make-node (_bst-key node)
                           (_bst-value node)
                           (_bst-left-child node)
-                          (bst-delete (_bst-right-child node) key)))))
+                          (map-delete (_bst-right-child node) key)))))
 
-(define (bst-flatten node)
+(define (map-flatten node)
   (if (null? node)
       '()
-      (append (bst-flatten (_bst-left-child node))
+      (append (map-flatten (_bst-left-child node))
               (cons (_bst-data node)
-                    (bst-flatten (_bst-right-child node))))))
+                    (map-flatten (_bst-right-child node))))))
